@@ -1,0 +1,6 @@
+{
+  "name": "ScholarFind",
+  "description": "Scholarship discovery platform helping students find legitimate international scholarship opportunities.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
