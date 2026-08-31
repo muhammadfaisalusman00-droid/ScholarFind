@@ -19,21 +19,9 @@ export interface AdSlotProps {
 }
 
 /**
- * Dynamically loads the official Google AdSense script into <head>
- * only when a valid publisher ID is present.
+ * The AdSense script is already included in index.html, so this component
+ * should only initialize ad slots without inserting a duplicate script tag.
  */
-const loadAdSenseScript = (clientId: string) => {
-  if (!clientId || typeof document === 'undefined') return;
-  const scriptId = 'google-adsense-js';
-  if (document.getElementById(scriptId)) return;
-
-  const script = document.createElement('script');
-  script.id = scriptId;
-  script.async = true;
-  script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${clientId}`;
-  script.crossOrigin = 'anonymous';
-  document.head.appendChild(script);
-};
 
 /**
  * Maps default environment variables to ad placement positions.
@@ -90,10 +78,8 @@ export const AdSlot: React.FC<AdSlotProps> = ({
     }
 
     if (activeAdClient && activeAdSlot) {
-      // 1. Ensure the Google AdSense script is injected into <head>
-      loadAdSenseScript(activeAdClient);
-
-      // 2. Initialize ad unit safely with duplicate push protection
+      // The AdSense script is already bootstrapped in index.html.
+      // Only initialize the actual ad unit without re-inserting the script.
       if (
         insRef.current &&
         !isInitializedRef.current &&
