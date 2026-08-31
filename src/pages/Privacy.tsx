@@ -92,13 +92,7 @@ export const Privacy: React.FC = () => {
             <section className="space-y-2">
               <h2 className="text-base font-extrabold text-slate-900">6. Advertising</h2>
               <p>
-                ScholarFind includes designated layout slots prepared for potential integration with third-party advertising partners, such as Google AdSense.
-              </p>
-              <p>
-                <strong className="text-slate-900">Current Prototype Status:</strong> Real Google AdSense scripts and live third-party ad networks are not actively connected in this prototype. The website displays static, non-tracking placeholder indicators.
-              </p>
-              <p>
-                <strong className="text-slate-900">Future Advertising Integration:</strong> When live advertising services are enabled on the production website, third-party vendors (including Google) may use cookies, web beacons, or unique device identifiers to serve, measure, and personalize advertisements based on user visits. You will have options to opt out of personalized advertising through third-party settings such as Google Ad Settings or regional digital advertising preference tools.
+                ### Advertising — ScholarFind may display advertisements provided by third-party advertising partners, including Google AdSense. These partners may use cookies or similar technologies to provide, measure, and personalize advertisements. Users may manage their advertising preferences through the relevant third-party settings.
               </p>
             </section>
 
