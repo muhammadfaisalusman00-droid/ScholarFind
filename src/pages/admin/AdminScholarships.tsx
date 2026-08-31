@@ -28,6 +28,8 @@ export const AdminScholarships: React.FC = () => {
   const [selectedStatus, setSelectedStatus] = useState<string>('All');
   const [selectedDegree, setSelectedDegree] = useState<string>('All');
   const [selectedField, setSelectedField] = useState<string>('All');
+  const [actionLoading, setActionLoading] = useState(false);
+  const [actionError, setActionError] = useState<string | null>(null);
 
   const [confirmModal, setConfirmModal] = useState<{
     isOpen: boolean;
@@ -51,13 +53,23 @@ export const AdminScholarships: React.FC = () => {
   };
 
   const handleAction = async () => {
-    if (!confirmModal.scholarship) return;
-    await scholarshipService.archiveOrDeleteScholarship(
-      confirmModal.scholarship.id,
-      confirmModal.action
-    );
-    setConfirmModal({ isOpen: false, scholarship: null, action: 'archive' });
-    loadData();
+    if (!confirmModal.scholarship || actionLoading) return;
+
+    setActionLoading(true);
+    setActionError(null);
+
+    try {
+      await scholarshipService.archiveOrDeleteScholarship(
+        confirmModal.scholarship.id,
+        confirmModal.action
+      );
+      setConfirmModal({ isOpen: false, scholarship: null, action: 'archive' });
+      await loadData();
+    } catch (error) {
+      setActionError(error instanceof Error ? error.message : 'Unable to complete this action.');
+    } finally {
+      setActionLoading(false);
+    }
   };
 
   const filteredScholarships = scholarships.filter((s) => {
@@ -270,7 +282,7 @@ export const AdminScholarships: React.FC = () => {
                             <Edit className="w-4 h-4" />
                           </Link>
 
-                          {(s.status || 'Published') === 'Published' ? (
+                          {(s.status || 'Published') === 'Published' && (
                             <button
                               onClick={() =>
                                 setConfirmModal({
@@ -284,21 +296,21 @@ export const AdminScholarships: React.FC = () => {
                             >
                               <Archive className="w-4 h-4" />
                             </button>
-                          ) : (
-                            <button
-                              onClick={() =>
-                                setConfirmModal({
-                                  isOpen: true,
-                                  scholarship: s,
-                                  action: 'delete',
-                                })
-                              }
-                              className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors"
-                              title="Delete Scholarship"
-                            >
-                              <Trash2 className="w-4 h-4" />
-                            </button>
                           )}
+
+                          <button
+                            onClick={() =>
+                              setConfirmModal({
+                                isOpen: true,
+                                scholarship: s,
+                                action: 'delete',
+                              })
+                            }
+                            className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors"
+                            title="Delete Scholarship"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
 
                           {(s.status || 'Published') === 'Published' && (
                             <a
@@ -364,6 +376,32 @@ export const AdminScholarships: React.FC = () => {
                         Edit
                       </Link>
                       {(s.status || 'Published') === 'Published' && (
+                        <button
+                          onClick={() =>
+                            setConfirmModal({
+                              isOpen: true,
+                              scholarship: s,
+                              action: 'archive',
+                            })
+                          }
+                          className="px-2.5 py-1.5 text-xs font-medium bg-amber-50 text-amber-700 rounded-lg"
+                        >
+                          Archive
+                        </button>
+                      )}
+                      <button
+                        onClick={() =>
+                          setConfirmModal({
+                            isOpen: true,
+                            scholarship: s,
+                            action: 'delete',
+                          })
+                        }
+                        className="px-2.5 py-1.5 text-xs font-medium bg-rose-50 text-rose-700 rounded-lg"
+                      >
+                        Delete
+                      </button>
+                      {(s.status || 'Published') === 'Published' && (
                         <a
                           href={`/scholarships/${s.slug}`}
                           target="_blank"
@@ -393,24 +431,36 @@ export const AdminScholarships: React.FC = () => {
               Are you sure you want to {confirmModal.action} <strong>"{confirmModal.scholarship.title}"</strong>?
               {confirmModal.action === 'archive'
                 ? ' It will be hidden from the public directory but preserved in admin records.'
-                : ' This action cannot be undone.'}
+                : ' This action cannot be undone and permanently removes the scholarship from the database.'}
             </p>
+            {actionError && (
+              <p className="text-xs text-rose-600 bg-rose-50 border border-rose-200 rounded-lg px-3 py-2">
+                {actionError}
+              </p>
+            )}
             <div className="flex items-center justify-end gap-3 pt-2">
               <button
-                onClick={() => setConfirmModal({ isOpen: false, scholarship: null, action: 'archive' })}
+                onClick={() => {
+                  setActionError(null);
+                  setConfirmModal({ isOpen: false, scholarship: null, action: 'archive' });
+                }}
                 className="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl transition-colors"
+                disabled={actionLoading}
               >
                 Cancel
               </button>
               <button
                 onClick={handleAction}
+                disabled={actionLoading}
                 className={`px-4 py-2 text-xs font-semibold text-white rounded-xl shadow-xs transition-colors ${
+                  actionLoading ? 'opacity-70 cursor-not-allowed' : ''
+                } ${
                   confirmModal.action === 'archive'
                     ? 'bg-amber-600 hover:bg-amber-700'
                     : 'bg-rose-600 hover:bg-rose-700'
                 }`}
               >
-                Confirm {confirmModal.action === 'archive' ? 'Archive' : 'Delete'}
+                {actionLoading ? 'Processing...' : `Confirm ${confirmModal.action === 'archive' ? 'Archive' : 'Delete'}`}
               </button>
             </div>
           </div>
