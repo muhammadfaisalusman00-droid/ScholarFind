@@ -21,6 +21,8 @@ export interface FieldCategory {
   majors: FieldMajor[];
 }
 
+export const ALL_FIELDS = 'All Fields';
+
 export class HomepageFieldsData {
   // 9 Major Fields for Homepage
   static HOMEPAGE_FIELDS: HomepageField[] = [

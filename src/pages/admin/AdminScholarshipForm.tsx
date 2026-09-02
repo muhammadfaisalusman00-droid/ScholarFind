@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { Scholarship, DegreeLevel, FundingType, ScholarshipStatus } from '../../types/scholarship';
 import { scholarshipService } from '../../services/scholarshipService';
-import { HomepageFieldsData } from '../../data/fieldsData';
+import { ALL_FIELDS, HomepageFieldsData } from '../../data/fieldsData';
 import {
   ArrowLeft,
   Save,
@@ -352,6 +352,7 @@ export const AdminScholarshipForm: React.FC = () => {
                 onChange={(e) => setFieldOfStudy(e.target.value)}
                 className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all"
               >
+                <option value={ALL_FIELDS}>{ALL_FIELDS}</option>
                 {HomepageFieldsData.HOMEPAGE_FIELDS.map((f) => (
                   <option key={f.id} value={f.field}>
                     {f.field}

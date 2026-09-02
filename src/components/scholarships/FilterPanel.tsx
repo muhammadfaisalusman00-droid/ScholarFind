@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { RotateCcw, Filter, Globe, GraduationCap, DollarSign, BookOpen, Check } from 'lucide-react';
 import { FilterState } from '../../types/scholarship';
+import { ALL_FIELDS, HomepageFieldsData } from '../../data/fieldsData';
 
 interface FilterPanelProps {
   appliedFilters: FilterState;
@@ -40,12 +41,8 @@ const FUNDINGS = [
 
 const FIELDS = [
   'Any field',
-  'Computer Science',
-  'Engineering',
-  'Business',
-  'Medicine',
-  'Arts',
-  'Social Sciences'
+  ALL_FIELDS,
+  ...HomepageFieldsData.HOMEPAGE_FIELDS.map((field) => field.field)
 ];
 
 export const FilterPanel: React.FC<FilterPanelProps> = ({

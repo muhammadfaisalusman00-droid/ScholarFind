@@ -1,4 +1,5 @@
 import { Scholarship, FilterState } from '../types/scholarship';
+import { ALL_FIELDS } from '../data/fieldsData';
 
 export function filterScholarships(scholarships: Scholarship[], filters: FilterState): Scholarship[] {
   return scholarships.filter((item) => {
@@ -50,8 +51,10 @@ export function filterScholarships(scholarships: Scholarship[], filters: FilterS
     }
 
     // 5. Field of Study
-    if (filters.field && filters.field !== 'Any field' && filters.field !== 'All') {
-      if (!item.fieldOfStudy.toLowerCase().includes(filters.field.toLowerCase()) && !filters.field.toLowerCase().includes(item.fieldOfStudy.toLowerCase())) {
+    if (filters.field && filters.field !== 'Any field' && filters.field !== 'All' && filters.field !== ALL_FIELDS) {
+      const selectedField = filters.field.toLowerCase().trim();
+      const itemField = item.fieldOfStudy.toLowerCase().trim();
+      if (itemField !== selectedField && itemField !== ALL_FIELDS.toLowerCase()) {
         return false;
       }
     }

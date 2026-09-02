@@ -1,6 +1,6 @@
 import { Scholarship, FieldItem, SiteSettings } from '../types/scholarship';
 import { MOCK_SCHOLARSHIPS } from '../data/scholarships';
-import { HomepageFieldsData } from '../data/fieldsData';
+import { ALL_FIELDS, HomepageFieldsData } from '../data/fieldsData';
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
 
 const SCHOLARSHIPS_STORAGE_KEY = 'sf_scholarships_db';
@@ -474,6 +474,10 @@ export const scholarshipService = {
   },
 
   async saveField(field: Omit<FieldItem, 'id'> & { id?: string }): Promise<FieldItem> {
+    if (field.name.trim().toLowerCase() === ALL_FIELDS.toLowerCase()) {
+      throw new Error(`"${ALL_FIELDS}" is a reserved scholarship option and is not stored as an academic field.`);
+    }
+
     const newField: FieldItem = {
       id: field.id || field.name.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
       name: field.name,
