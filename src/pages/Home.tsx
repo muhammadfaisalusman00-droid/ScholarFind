@@ -9,6 +9,7 @@ import { Scholarship } from '../types/scholarship';
 import { scholarshipService } from '../services/scholarshipService';
 import { HomepageFieldsData } from '../data/fieldsData';
 import { AdSlot } from '../components/ads/AdSlot';
+import { AdsterraSlot } from '../components/ads/AdsterraSlot';
 import { AffiliatePromotionCard } from '../components/promotions/AffiliatePromotionCard';
 
 export const Home: React.FC = () => {
@@ -64,6 +65,7 @@ export const Home: React.FC = () => {
 
       {/* Ad Placement 1: After Hero / Search Section */}
       <AdSlot position="homepage-after-hero" className="max-w-[1536px] w-full mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 pt-4 pb-2" />
+      <AdsterraSlot format="banner" className="max-w-[1536px] w-full mx-auto pt-4 pb-2" />
 
       {/* 2. Scholarships Worth Discovering Section */}
       <section className="bg-[#F8F9FE] py-12 sm:py-16">

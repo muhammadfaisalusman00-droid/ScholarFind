@@ -92,7 +92,7 @@ export const Privacy: React.FC = () => {
             <section className="space-y-2">
               <h2 className="text-base font-extrabold text-slate-900">6. Advertising</h2>
               <p>
-                ### Advertising — ScholarFind may display advertisements provided by third-party advertising partners, including Google AdSense. These partners may use cookies or similar technologies to provide, measure, and personalize advertisements. Users may manage their advertising preferences through the relevant third-party settings.
+                ScholarFind may display advertisements provided by third-party advertising partners, including Google AdSense and Adsterra. These partners may use cookies or similar tracking technologies to provide, measure, and personalize advertisements. Users may manage their advertising preferences through the relevant third-party settings.
               </p>
             </section>
 

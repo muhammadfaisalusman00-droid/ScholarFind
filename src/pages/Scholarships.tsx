@@ -8,6 +8,7 @@ import { Scholarship, FilterState } from '../types/scholarship';
 import { scholarshipService } from '../services/scholarshipService';
 import { filterScholarships } from '../utils/filterUtils';
 import { AdSlot } from '../components/ads/AdSlot';
+import { AdsterraSlot } from '../components/ads/AdsterraSlot';
 
 const ITEMS_PER_PAGE = 15;
 
@@ -193,6 +194,7 @@ export const Scholarships: React.FC = () => {
 
         {/* Ad Placement 3: Scholarship Directory (After Search/Filters, Before Results Grid) */}
         <AdSlot position="scholarship-directory" className="my-6" />
+        <AdsterraSlot format="native" className="my-6 w-full" />
 
         {/* 2-Column Desktop Grid directly on page background */}
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
