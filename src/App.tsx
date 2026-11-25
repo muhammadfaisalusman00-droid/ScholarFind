@@ -16,11 +16,12 @@ import { NotFound } from './pages/NotFound';
 
 // Admin Imports
 import { AdminLogin } from './pages/admin/AdminLogin';
-import { AdminDashboard } from './pages/admin/AdminDashboard';
+import { AdminDashboardVideo } from './pages/admin/AdminDashboardVideo';
 import { AdminScholarships } from './pages/admin/AdminScholarships';
 import { AdminScholarshipForm } from './pages/admin/AdminScholarshipForm';
 import { AdminFields } from './pages/admin/AdminFields';
 import { AdminPromotions } from './pages/admin/AdminPromotions';
+import { AdminVideos } from './pages/admin/AdminVideos';
 import { AdminSettings } from './pages/admin/AdminSettings';
 import { AdminLayout } from './components/admin/AdminLayout';
 import { ProtectedRoute } from './components/admin/ProtectedRoute';
@@ -81,7 +82,9 @@ export default function App() {
             </ProtectedRoute>
           }
         >
-          <Route index element={<AdminDashboard />} />
+          <Route index element={<AdminDashboardVideo />} />
+          <Route path="videos" element={<AdminVideos />} />
+          <Route path="videos/new" element={<AdminVideos />} />
           <Route path="scholarships" element={<AdminScholarships />} />
           <Route path="scholarships/new" element={<AdminScholarshipForm />} />
           <Route path="scholarships/:id/edit" element={<AdminScholarshipForm />} />

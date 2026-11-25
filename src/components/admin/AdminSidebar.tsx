@@ -2,10 +2,8 @@ import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard,
-  GraduationCap,
+  Video,
   PlusCircle,
-  Layers,
-  Sparkles,
   Settings,
   LogOut,
   ExternalLink,
@@ -36,24 +34,14 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({ mobileOpen, onCloseM
       exact: true,
     },
     {
-      label: 'Scholarships',
-      path: '/admin/scholarships',
-      icon: GraduationCap,
+      label: 'Videos',
+      path: '/admin/videos',
+      icon: Video,
       exact: true,
       subItems: [
-        { label: 'All Scholarships', path: '/admin/scholarships' },
-        { label: 'Add Scholarship', path: '/admin/scholarships/new', icon: PlusCircle },
+        { label: 'All Videos', path: '/admin/videos' },
+        { label: 'Upload Video', path: '/admin/videos/new', icon: PlusCircle },
       ]
-    },
-    {
-      label: 'Fields',
-      path: '/admin/fields',
-      icon: Layers,
-    },
-    {
-      label: 'Affiliate Promotions',
-      path: '/admin/affiliate-promotions',
-      icon: Sparkles,
     },
     {
       label: 'Settings',
@@ -67,13 +55,13 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({ mobileOpen, onCloseM
       {/* Brand Header */}
       <div className="p-5 border-b border-slate-800 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center text-white font-bold shadow-md shadow-indigo-900/50">
-            SF
+          <div className="w-9 h-9 rounded-xl bg-white text-neutral-950 flex items-center justify-center text-sm font-black shadow-md">
+            VD
           </div>
           <div>
             <div className="font-bold text-white text-base tracking-tight leading-none flex items-center gap-1.5">
-              ScholarFind
-              <span className="text-[10px] font-semibold bg-indigo-500/20 text-indigo-300 px-1.5 py-0.5 rounded border border-indigo-500/30">
+              Videra
+              <span className="text-[10px] font-semibold bg-white/10 text-neutral-300 px-1.5 py-0.5 rounded border border-white/10">
                 CMS
               </span>
             </div>

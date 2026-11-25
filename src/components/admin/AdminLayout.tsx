@@ -12,9 +12,10 @@ export const AdminLayout: React.FC = () => {
 
   const getBreadcrumbTitle = (part: string, index: number) => {
     if (part === 'admin' && index === 0) return 'Admin';
+    if (part === 'videos') return 'Videos';
     if (part === 'scholarships') return 'Scholarships';
-    if (part === 'new') return 'Add New Scholarship';
-    if (part === 'edit') return 'Edit Scholarship';
+    if (part === 'new') return 'Upload Video';
+    if (part === 'edit') return 'Edit Video';
     if (part === 'fields') return 'Academic Fields';
     if (part === 'affiliate-promotions') return 'Affiliate Promotions';
     if (part === 'settings') return 'Site Settings';
