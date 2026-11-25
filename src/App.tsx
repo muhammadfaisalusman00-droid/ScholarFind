@@ -6,6 +6,8 @@ import { Home } from './pages/Home';
 import { Scholarships } from './pages/Scholarships';
 import { ScholarshipDetails } from './pages/ScholarshipDetails';
 import { Fields } from './pages/Fields';
+import { Videos } from './pages/Videos';
+import { VideoDetails } from './pages/VideoDetails';
 import { About } from './pages/About';
 import { Contact } from './pages/Contact';
 import { Privacy } from './pages/Privacy';
@@ -37,7 +39,7 @@ function ScrollToTop() {
 // Public website wrapper layout with Public Header & Footer
 function PublicLayout() {
   return (
-    <div className="flex flex-col min-h-screen bg-white text-slate-900 font-sans antialiased selection:bg-indigo-100 selection:text-indigo-900">
+    <div className="flex flex-col min-h-screen bg-black text-white font-sans antialiased selection:bg-white selection:text-black">
       <Header />
       <main className="flex-1">
         <Outlet />
@@ -55,6 +57,8 @@ export default function App() {
         {/* Public Website Routes */}
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/videos" element={<Videos />} />
+          <Route path="/videos/:slug" element={<VideoDetails />} />
           <Route path="/scholarships" element={<Scholarships />} />
           <Route path="/scholarships/:slug" element={<ScholarshipDetails />} />
           <Route path="/fields" element={<Fields />} />
